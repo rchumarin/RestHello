@@ -6,7 +6,7 @@ Database: MySQL
 
 Database will be created automatically.
 
-## 1. Start using Tomcat
+## 1. Start without Vagrant
 
 mvn tomcat7:run
 
