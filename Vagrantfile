@@ -20,8 +20,7 @@ SCRIPT
 
 $setupDatabase = <<SCRIPT
  echo -e "\n--- Creating database... ---\n"
- mysql -uroot -proot -e "CREATE DATABASE contact_manger IF  NOT EXISTS"
+ mysql -uroot -proot -e "CREATE DATABASE contact_manger IF NOT EXISTS"
  mysql -uroot -proot -e "grant all privileges on contact_manager.* to 'root'@'localhost' identified by 'root'"
-
 
 SCRIPT

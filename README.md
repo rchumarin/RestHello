@@ -1,5 +1,7 @@
 # RestHello
 
+Database will be created automatically.
+
 ## 1. Start using Tomcat
 
 mvn tomcat7:run
