@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class RegExpTest {
+public class RegExpTests {
 
     public static Contact FirstTestContact = null;
     public static Contact SecondTestContact = null;
