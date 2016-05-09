@@ -1,5 +1,9 @@
 # RestHello
 
+Technologies: Java 8, REST, Spring 4, Hibernate 4, SLF4J.
+
+Database: MySQL
+
 Database will be created automatically.
 
 ## 1. Start using Tomcat
