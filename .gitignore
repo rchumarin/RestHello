@@ -17,3 +17,6 @@
 
 # target folder
 target/*
+
+#vagrant folder
+.vagrant/*
