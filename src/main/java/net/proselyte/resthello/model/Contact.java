@@ -3,6 +3,12 @@ package net.proselyte.resthello.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Simple JavaBEan domain object that represents Contact.
+ *
+ * @author Eugene Suleimanov
+ * */
+
 @Entity
 @Table(name = "contacts")
 public class Contact implements  Serializable{

@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Implementation of {@link net.proselyte.resthello.service.ContactService} interface.
+ *
+ * @author Eugene Suleimanov
+ */
+
 @Service
 public class ContactServiceImpl implements ContactService {
 

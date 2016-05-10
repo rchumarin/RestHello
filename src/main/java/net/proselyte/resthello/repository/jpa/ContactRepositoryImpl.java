@@ -16,6 +16,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * JPA implementation of {@link net.proselyte.resthello.repository.ContactRepository} interface.
+ *
+ * @author Eugene Suleimanov
+ */
+
 @Repository
 public class ContactRepositoryImpl implements ContactRepository {
 
