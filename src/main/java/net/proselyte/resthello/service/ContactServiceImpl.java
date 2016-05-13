@@ -20,10 +20,16 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     ContactRepository contactRepository;
 
-    @Transactional
     @Override
+    @Transactional
     public List<Contact> getFilteredContacts(String param) {
         return contactRepository.getFilteredContacts(param);
+    }
+
+    @Override
+    @Transactional
+    public List<Contact> retrieveContacts(int pageSize, int pageNumber, String param) {
+        return contactRepository.retrieveContactsWithPaging(pageSize, pageNumber, param);
     }
 
 }

@@ -13,4 +13,6 @@ import java.util.List;
 
 public interface ContactService {
     List<Contact> getFilteredContacts(String param);
+
+    public List<Contact> retrieveContacts(int pageSize, int pageNumber, String param);
 }

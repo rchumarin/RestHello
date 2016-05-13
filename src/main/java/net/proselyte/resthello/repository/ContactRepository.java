@@ -20,4 +20,6 @@ public interface ContactRepository {
      * @return filteredContacts
      */
     List<Contact> getFilteredContacts(String param);
+
+    public List<Contact> retrieveContactsWithPaging(int pageSize, int pageNumber, String param);
 }

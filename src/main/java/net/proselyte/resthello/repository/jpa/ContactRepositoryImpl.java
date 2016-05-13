@@ -2,8 +2,7 @@ package net.proselyte.resthello.repository.jpa;
 
 import net.proselyte.resthello.model.Contact;
 import net.proselyte.resthello.repository.ContactRepository;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,38 +32,63 @@ public class ContactRepositoryImpl implements ContactRepository {
     @Override
     @SuppressWarnings("unchecked")
     public List<Contact> getFilteredContacts(String param) {
-        String hql = "from Contact";
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        Pattern pattern = Pattern.compile(param);
+        List<Contact> contacts = new LinkedList<>();
 
-        List<Contact> contacts = query.list();
-        for (Contact contact : contacts) {
-            logger.info("Filtered contacts lis: " + contact);
+        StatelessSession session = this.sessionFactory.openStatelessSession();
+
+        ScrollableResults contactCursor = session.createQuery("from Contact").scroll(ScrollMode.FORWARD_ONLY);
+
+        logger.info("Getting contacts that meet pattern: " + param + "...");
+        long start = System.currentTimeMillis();
+        while (contactCursor.next()) {
+            Contact currentContact = (Contact) contactCursor.get(0);
+            Matcher m = pattern.matcher(currentContact.getName());
+            if (!m.matches()) {
+                contacts.add(currentContact);
+            }
         }
+        long end = System.currentTimeMillis();
+        long timeElapsed = end - start;
 
+        logger.info(timeElapsed + " ms elapsed for retrieving and processing data.");
 
-        return filterContacts(contacts, param);
+        contactCursor.close();
+        session.close();
+
+        logger.info(contacts.size() + " contacts found.");
+
+        return contacts;
     }
 
 
     /**
-     * This method filter contacts that meet required pattern
+     * Methods for paging
      */
-    private LinkedList<Contact> filterContacts(List<Contact> contacts, String param) {
+    public List<Contact> retrieveContactsWithPaging(int pageSize, int pageNumber, String param) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Contact> contacts = null;
+
+        Query query = session.createQuery("from Contact");
+        query = query.setFirstResult(pageSize * (pageNumber - 1));
+        query.setMaxResults(pageSize);
+        contacts = query.list();
+
+        return filterContacts(contacts, param);
+    }
+
+    private LinkedList<Contact> filterContacts(List<Contact> allContacts, String param) {
 
         Pattern p = Pattern.compile(param);
-        LinkedList<Contact> filteredContacts = new LinkedList<Contact>(contacts);
+        LinkedList<Contact> sortedContacts = new LinkedList<Contact>(allContacts);
 
-        logger.info("Filtering contacts...");
-
-        Iterator<Contact> itr = filteredContacts.iterator();
+        Iterator<Contact> itr = sortedContacts.iterator();
         while (itr.hasNext()) {
             Contact currentContact = itr.next();
             Matcher m = p.matcher(currentContact.getName());
-            if (m.matches()) {
-                logger.info("Contact removed from list: " + itr);
-                itr.remove();
-            }
+            if (m.matches()) itr.remove();
         }
-        return filteredContacts;
+
+        return sortedContacts;
     }
 }
