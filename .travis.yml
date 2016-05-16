@@ -5,8 +5,6 @@ jdk:
 
 before_script:
   - "mysql -e 'create database contact_manager;'"
-  - "mysql -e 'create table contacts;'"
-  - "mysql -e 'INSERT INTO contacts (name) VALUES ('Albert');'"
 
 script: mvn install
 
