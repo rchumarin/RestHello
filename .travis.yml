@@ -3,6 +3,7 @@ language: java
 jdk:
   - oraclejdk8
 
+before_script:
 - "mysql -e 'create database contact_manager;'"
 
 script: mvn install
