@@ -3,4 +3,7 @@ language: java
 jdk:
   - oraclejdk8
 
+- "mysql -e 'create database contact_manager;'"
+  - "cp ./.travis.database.yml"
+
 script: mvn install
