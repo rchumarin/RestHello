@@ -1,5 +1,7 @@
 package net.proselyte.resthello;
 
+import net.proselyte.resthello.service.ContactService;
+import net.proselyte.resthello.service.ContactServiceImpl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -68,4 +70,6 @@ public class RegExpTests {
         assertFalse(m.matches());
 
     }
+
+
 }
