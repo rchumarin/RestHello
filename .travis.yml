@@ -4,7 +4,7 @@ jdk:
   - oraclejdk8
 
 before_script:
-  - "mysql -e 'create database my_app_test;'"
+  - "mysql -e 'create database contact_manager;'"
 
 script: mvn install
 
