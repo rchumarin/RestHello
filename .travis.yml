@@ -4,6 +4,6 @@ jdk:
   - oraclejdk8
 
 - "mysql -e 'create database contact_manager;'"
-  - "cp ./.travis.database.yml"
+  - "cp ./.database.yml"
 
 script: mvn install
