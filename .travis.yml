@@ -3,4 +3,12 @@ language: java
 jdk:
   - oraclejdk8
 
+before_script:
+  - "mysql -e 'create database my_app_test;'"
+
 script: mvn install
+
+after_failure:
+  - "mysql -e 'show databases;'"
+  - "cat ./config/database.yml"
+  - "bundle exec rake --version"
