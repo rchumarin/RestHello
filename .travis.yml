@@ -6,7 +6,7 @@ jdk:
 before_script:
   - "mysql -e 'create database contact_manager;'"
   - "mysql -e 'create table contact_manager.contacts (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(100), PRIMARY KEY(id));'"
-  - "mysql -e 'INSERT INTO contact_manager.contacts (name) VALUES ('Albert');'"
+  - "mysql -e 'INSERT INTO contact_manager.contacts VALUES (1, 'Albert');'"
 
 script: mvn install
 
